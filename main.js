@@ -1,167 +1,92 @@
-// const name = "James";
+// class Animal {
+//     constructor(name, age) {
+//         this.name = name
+//         this.age = age
+//     }
 
-// const person = { first: name };
+//     eat = function() {
+//         console.log(`${this.name} is eating!`)
+//     }
 
-// console.log(person);
+//     play = function() {
+//         console.log(`${this.name} is playing!`)
+//     }
 
-// const sayHelloLinting = (fName) => {
-//     console.log(`Hello linting, ${fName}`);
-// };
-
-// sayHelloLinting("Matus");
-
-// const myObject = {
-//     property: "Value!",
-//     otherProperty: 77,
-//     obnoxious: () => {
-//         console.log("myObject.propery")
+//     sleep = function() {
+//         console.log(`${this.name} is sleeping!`)
 //     }
 // }
 
-// class Object1 {
-//     constructor(namet, energy) {
-//         this.name = namet
-//         this.energy = energy
+// class Dog extends Animal {
+//     constructor(name, age, breed) {
+//         super(name, age)
+//         this.breed = breed
 //     }
 
-//     eat(amount) {
-//         console.log(`${this.name} have ${amount}.`)
-//         this.energy += amount
-//     }
-// }
-
-// const leo = new Object1("Leo", "5")
-
-// leo.eat(500)
-
-
-// myObject.obnoxious();
-
-// function Player(namer, marker) {
-//     this.name = namer
-//     this.marker = marker
-//     this.sayName = () => {
-//         console.log(namer)
+//     bark() {
+//         console.log(`${this.name} is ${this.breed} and he is barking at you!`)
 //     }
 // }
 
-// const player1 = new Player("Steve", "X")
-// const player2 = new Player("Juan", "O")
-// player1.sayName()
-// player2.sayName()
+// const coco = new Dog("Coco", 50, "Cockerspanish")
 
-// function Book(title, author, numOfPages, read) {
-//     this.title = title
-//     this.author = author
-//     this.numOfPages = numOfPages
-//     this.read = read
-//     this.info = () => `${title} by ${author}, ${numOfPages} pages, ${read} yet.`
+// console.log(coco.name)
+// console.log(coco.age)
+// console.log(coco.breed)
+// coco.bark()
+
+let myLibrary = ["Gulag, ", "The Great Gatsby, ", "Harry Potter, ", "Lord of the Rings, ", "Wim Hof, "]
+let content = document.querySelector('.content')
+const btn = document.querySelector('.btn')
+const btnD = document.querySelector('.btnD')
+    // class Book {
+    //     constructor() {
+
+//     }
 // }
 
-// function Car() {
-
-// }
-
-// Car.prototype.sayBrand = () => {
-//     console.log(this.name)
-// }
-
-// Book.prototype = Object.create(Car.prototype)
-
-// Book.prototype.print = () => "GOTCHA BITCH!"
-
-
-// const gulag = new Book("Gulag", "Alexander Solzeniczin", 450, "read")
-// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "not read")
-// console.log(gulag.info())
-// console.log(theHobbit.info())
-// console.log(gulag.print())
-// gulag.sayBrand()
-
-// // INHERITANCE
-
-// // const animal = {
-// //     eats: true
-// // }
-
-// // const rabbit = {
-// //     jumps: true,
-// //     __proto__: animal
-// // }
-
-// // for (const prop in rabbit) {
-// //     const isOwn = rabbit.hasOwnProperty(prop)
-
-// //     if (isOwn) {
-// //         alert(`Our: ${prop}`)
-// //     } else {
-// //         alert(`Inherited: ${prop}`)
-// //     }
-// // }
-// console.log(Car.prototype)
-
-// function Animal(name, age) {
-//     this.name = name
-//     this.age = age
-// }
-class Animal {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-    }
-
-    eat = function() {
-        console.log(`${this.name} is eating!`)
-    }
-
-    play = function() {
-        console.log(`${this.name} is playing!`)
-    }
-
-    sleep = function() {
-        console.log(`${this.name} is sleeping!`)
-    }
+function loopLibrary() {
+    content.textContent = ""
+    myLibrary.forEach(book => {
+        content.textContent += book
+    })
 }
 
-class Dog extends Animal {
-    constructor(name, age, breed) {
-        super(name, age)
-        this.breed = breed
+window.onload = loopLibrary()
+
+function addBook() {
+    let book = prompt("Please add book to library!")
+
+    if (book === null || book === undefined) {
+        return
+    } else if (myLibrary.includes(book + ", ")) {
+        alert(`Book: ${book} is already in library!`)
+    } else {
+        myLibrary.push(book + ", ")
     }
 
-    bark() {
-        console.log(`${this.name} is ${this.breed} and he is barking at you!`)
-    }
+    loopLibrary()
 }
 
+function deleteBook() {
+    let deleted = prompt("What book do you want to delete ?")
 
-// function Animal(name, age) {
-//     this.name = name
-//     this.age = age
-// }
+    if (deleted === null || deleted === undefined) {
+        return
+    } else if (!myLibrary.includes(deleted + ", ")) {
+        alert(`Book: ${deleted} is NOT in library!`)
+    } else {
+        let a = myLibrary.indexOf(deleted + ", ")
+        myLibrary.splice(a, 1)
+    }
 
-// Animal.prototype.eat = function() {
-//     console.log(`${this.name} is eating!`)
-// }
+    loopLibrary()
+}
 
-// Animal.prototype.play = function() {
-//     console.log(`${this.name} is playing!`)
-// }
+btn.addEventListener("click", () => {
+    addBook()
+})
 
-// Animal.prototype.sleep = function() {
-//     console.log(`${this.name} is sleeping!`)
-// }
-
-// function Dog(name, age, breed) {
-//     Animal.call(this, name, age)
-//     this.breed = breed
-// }
-
-// Dog.prototype = Object.create(Animal.prototype)
-
-const coco = new Dog("Coco", 50, "Cockerspanish")
-
-console.log(coco.name)
-console.log(coco.age)
-console.log(coco.breed)
-coco.bark()
+btnD.addEventListener("click", () => {
+    deleteBook()
+})
