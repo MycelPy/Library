@@ -11,11 +11,23 @@
 
 <body>
     <h1>Library</h1>
-    <h1 class="content"></h1>
+
+    <form class='former'>
+        <ul>
+            <li><label for="book">Book: </label><input type="text" name="book" class="book" required></li>
+            <li><label for="author">Author: </label><input type="text" name="author" class="author" required></li>
+            <li><label for="numofpgs">Number of pages: </label><input type="number" name="numofpgs" class="numofpgs" min="1" max="1500" required></li>
+            <li><label for="read">Read: </label><input type="checkbox" name="read" class="read"></li>
+            <li><button type="submit" class="submit">Submit book</button></li>
+        </ul>
+    </form>
+
+    <div class="library">
+
+    </div>
+
     <button class="btn">Add Book</button>
-    <button class="btnD">Delete Book</button>
-
-
+    <!-- <button class="btnD">Delete Book</button> -->
     <script src="main.js"></script>
 </body>
 

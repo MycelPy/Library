@@ -34,59 +34,150 @@
 // console.log(coco.age)
 // console.log(coco.breed)
 // coco.bark()
-
-let myLibrary = ["Gulag, ", "The Great Gatsby, ", "Harry Potter, ", "Lord of the Rings, ", "Wim Hof, "]
-let content = document.querySelector('.content')
-const btn = document.querySelector('.btn')
-const btnD = document.querySelector('.btnD')
-    // class Book {
-    //     constructor() {
-
+// class Book {
+//     constructor(book, author, numofpgs, read) {
+//         this.book = book
+//         this.author = author
+//         this.numofpgs = numofpgs
+//         this.read = read
 //     }
 // }
 
-function loopLibrary() {
-    content.textContent = ""
-    myLibrary.forEach(book => {
-        content.textContent += book
-    })
+// const gulag = new Book('Gulag', 'Alexander Solzeniczin', '1500', 'read')
+// const gatsby = new Book('The Great Gatsby', 'Francis Scott Key Fitzgerald', '450', 'not read')
+// const lotr = new Book('Lord of the Rings', 'Tolkien', '1230', 'read')
+// const potter = new Book('Harry Potter', 'Rowling', '400', 'note read')
+
+// let myLibrary = [gulag1, gatsby1, lotr1, potter1]
+// let content = document.querySelector('.content')
+// const btn = document.querySelector('.btn')
+// const btnD = document.querySelector('.btnD')
+// const library = document.querySelector('.library')
+
+// console.log(myLibrary)
+
+// function loopLibrary() {
+//     content.textContent = ""
+//     myLibrary.forEach(book => {
+//         content.textContent += book
+//     })
+// }
+
+// window.onload = loopLibrary()
+
+// function addBook() {
+//     let book = prompt("Please add book to library!")
+
+//     if (book === null || book === undefined) {
+//         return
+//     } else if (myLibrary.includes(book + ", ")) {
+//         alert(`Book: ${book} is already in library!`)
+//     } else {
+//         myLibrary.push(book + ", ")
+//     }
+
+//     loopLibrary()
+// }
+
+// function deleteBook() {
+//     let deleted = prompt("What book do you want to delete ?")
+
+//     if (deleted === null || deleted === undefined) {
+//         return
+//     } else if (!myLibrary.includes(deleted + ", ")) {
+//         alert(`Book: ${deleted} is NOT in library!`)
+//     } else {
+//         let a = myLibrary.indexOf(deleted + ", ")
+//         myLibrary.splice(a, 1)
+//     }
+
+//     loopLibrary()
+// }
+
+// btn.addEventListener("click", () => {
+//     addBook()
+// })
+
+// btnD.addEventListener("click", () => {
+//     deleteBook()
+// })
+
+let myLibrary = []
+const btn = document.querySelector('.btn')
+const former = document.querySelector('.former')
+const library = document.querySelector('.library')
+const submit = document.querySelector('.submit')
+let isValid = former.checkValidity()
+former.style.display = 'none'
+class Book {
+    constructor(name, author, numofpgs, read) {
+        this.name = name
+        this.author = author
+        this.numofpgs = numofpgs
+        this.read = read
+    }
 }
 
-window.onload = loopLibrary()
-
-function addBook() {
-    let book = prompt("Please add book to library!")
-
-    if (book === null || book === undefined) {
-        return
-    } else if (myLibrary.includes(book + ", ")) {
-        alert(`Book: ${book} is already in library!`)
+btn.addEventListener('click', () => {
+    if (former.style.display === 'none') {
+        former.style.display = 'block'
     } else {
-        myLibrary.push(book + ", ")
+        former.style.display = 'none'
     }
 
-    loopLibrary()
-}
+    submit.onclick = (event) => {
 
-function deleteBook() {
-    let deleted = prompt("What book do you want to delete ?")
+        if (former.checkValidity()) {
+            let bookf = document.querySelector('.book')
+            let authorf = document.querySelector('.author')
+            let numofpgsf = document.querySelector('.numofpgs')
+            let readf = document.querySelector('.read')
 
-    if (deleted === null || deleted === undefined) {
-        return
-    } else if (!myLibrary.includes(deleted + ", ")) {
-        alert(`Book: ${deleted} is NOT in library!`)
-    } else {
-        let a = myLibrary.indexOf(deleted + ", ")
-        myLibrary.splice(a, 1)
+            former.checkValidity()
+            former.reportValidity()
+
+            myLibrary.push(bookf.value)
+
+            event.preventDefault()
+
+            const tab = document.createElement('div');
+            const book = document.createElement('p');
+            const author = document.createElement('p');
+            const numofpgs = document.createElement('p');
+
+            const labelRead = document.createElement('label')
+            labelRead.htmlFor = 'checker'
+            labelRead.innerHTML = 'Read: '
+
+            const read = document.createElement('input');
+            read.type = 'checkbox'
+            read.classList.add('checker')
+
+            const delBtn = document.createElement('button')
+            const line = document.createElement('hr')
+
+            tab.classList.add('card')
+            library.appendChild(tab)
+            tab.append(book, author, numofpgs, labelRead, read, delBtn, line)
+
+            book.textContent = `Book: ${bookf.value}`
+            author.textContent = `Author: ${authorf.value}`
+            numofpgs.textContent = `Num of pages: ${numofpgsf.value} pages`
+            delBtn.textContent = 'DELETE BOOK'
+            if (readf.checked) {
+                read.checked = true
+            } else {
+                read.checked = false
+            }
+
+            former.reset()
+
+            delBtn.addEventListener('click', () => {
+                tab.remove()
+            })
+
+        } else {
+            former.reportValidity()
+        }
     }
-
-    loopLibrary()
-}
-
-btn.addEventListener("click", () => {
-    addBook()
-})
-
-btnD.addEventListener("click", () => {
-    deleteBook()
 })
