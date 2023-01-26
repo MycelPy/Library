@@ -107,6 +107,9 @@ const btn = document.querySelector('.btn')
 const former = document.querySelector('.former')
 const library = document.querySelector('.library')
 const submit = document.querySelector('.submit')
+const overlay = document.querySelector('.overlay')
+const formerDiv = document.querySelector('.formerDiv')
+
 let isValid = former.checkValidity()
 former.style.display = 'none'
 class Book {
@@ -119,6 +122,15 @@ class Book {
 }
 
 btn.addEventListener('click', () => {
+
+    formerDiv.classList.add('indexer')
+
+    if (overlay.classList.contains('active')) {
+        overlay.classList.remove('active')
+    } else {
+        overlay.classList.add('active')
+    }
+
     if (former.style.display === 'none') {
         former.style.display = 'block'
     } else {
@@ -140,37 +152,50 @@ btn.addEventListener('click', () => {
 
             event.preventDefault()
 
-            const tab = document.createElement('div');
-            const book = document.createElement('p');
-            const author = document.createElement('p');
-            const numofpgs = document.createElement('p');
-
-            const labelRead = document.createElement('label')
-            labelRead.htmlFor = 'checker'
-            labelRead.innerHTML = 'Read: '
-
-            const read = document.createElement('input');
-            read.type = 'checkbox'
-            read.classList.add('checker')
-
+            const tab = document.createElement('div')
+            const book = document.createElement('p')
+            const author = document.createElement('p')
+            const numofpgs = document.createElement('p')
+            const conBtn = document.createElement('div')
             const delBtn = document.createElement('button')
-            const line = document.createElement('hr')
+            const readBtn = document.createElement('button')
 
             tab.classList.add('card')
+            conBtn.classList.add('cardBtn')
             library.appendChild(tab)
-            tab.append(book, author, numofpgs, labelRead, read, delBtn, line)
+            tab.append(book, author, numofpgs, conBtn)
+            conBtn.append(delBtn, readBtn)
 
             book.textContent = `Book: ${bookf.value}`
             author.textContent = `Author: ${authorf.value}`
             numofpgs.textContent = `Num of pages: ${numofpgsf.value} pages`
             delBtn.textContent = 'DELETE BOOK'
+            delBtn.classList.add('red', 'btn')
+
             if (readf.checked) {
-                read.checked = true
+                readBtn.classList.add('btn', 'green')
+                readBtn.textContent = 'READ'
             } else {
-                read.checked = false
+                readBtn.classList.add('btn', 'red')
+                readBtn.textContent = 'NOT READ'
             }
 
+            readBtn.addEventListener('click', () => {
+                if (readBtn.classList.contains('green')) {
+                    readBtn.classList.remove('green')
+                    readBtn.classList.add('red')
+                    readBtn.textContent = 'NOT READ'
+                } else {
+                    readBtn.classList.remove('red')
+                    readBtn.classList.add('green')
+                    readBtn.textContent = 'READ'
+                }
+            })
+
             former.reset()
+            former.style.display = 'none'
+            overlay.classList.remove('active')
+            formerDiv.classList.remove('indexer')
 
             delBtn.addEventListener('click', () => {
                 tab.remove()

@@ -6,28 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;700&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <title>Library</title>
 </head>
 
 <body>
-    <h1>Library</h1>
+    <div class="overlay">
+        <div class="container">
+            <h1>Library</h1>
 
-    <form class='former'>
-        <ul>
-            <li><label for="book">Book: </label><input type="text" name="book" class="book" required></li>
-            <li><label for="author">Author: </label><input type="text" name="author" class="author" required></li>
-            <li><label for="numofpgs">Number of pages: </label><input type="number" name="numofpgs" class="numofpgs" min="1" max="1500" required></li>
-            <li><label for="read">Read: </label><input type="checkbox" name="read" class="read"></li>
-            <li><button type="submit" class="submit">Submit book</button></li>
-        </ul>
-    </form>
+            <button class="btn">+</button>
 
-    <div class="library">
-
+            <div class="library"></div>
+        </div>
     </div>
 
-    <button class="btn">Add Book</button>
-    <!-- <button class="btnD">Delete Book</button> -->
+    <div class="formerDiv">
+        <form class='former'>
+            <ul>
+                <li><label for="book">Book: </label><input type="text" name="book" class="book" required></li>
+                <li><label for="author">Author: </label><input type="text" name="author" class="author" required></li>
+                <li><label for="numofpgs">Number of pages: </label><input type="number" name="numofpgs" class="numofpgs" min="1" max="1500" required></li>
+                <li><label for="read">Read: </label><input type="checkbox" name="read" class="read"></li>
+                <li><button type="submit" class="submit btn">Add book</button></li>
+            </ul>
+        </form>
+    </div>
     <script src="main.js"></script>
 </body>
 
